@@ -43,6 +43,11 @@ import static nl.mtvehicles.core.Main.schedulerRun;
 import static nl.mtvehicles.core.infrastructure.modules.VersionModule.getServerVersion;
 import static nl.mtvehicles.core.movement.PacketHandler.isObjectPacket;
 
+import static nl.mtvehicles.core.Main.logInfo;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+
 /**
  * Class concerning the movement of vehicles
  */
@@ -868,7 +873,7 @@ public class VehicleMovement {
     protected boolean steerIsJumping(){
         boolean isJumping = false;
         try {
-            Method method = packet.getClass().getDeclaredMethod("d");
+            Method method = packet.getClass().getDeclaredMethod("e");
             isJumping = (Boolean) method.invoke(packet);
         } catch (Exception e) {
             e.printStackTrace();
@@ -903,7 +908,8 @@ public class VehicleMovement {
     protected float steerGetZza(){
         float Zza = 0;
         try {
-            Method method = packet.getClass().getDeclaredMethod("c");
+            //logInfo(ReflectionToStringBuilder.toString(packet, ToStringStyle.SHORT_PREFIX_STYLE));
+            Method method = packet.getClass().getDeclaredMethod("d");
             Zza = (float) method.invoke(packet);
         } catch (Exception e) {
             e.printStackTrace();
